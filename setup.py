@@ -3,7 +3,7 @@ import sys, os
 
 version = '0.0'
 
-setup(name='pleiades.keytree',
+setup(name='keytree',
       version=version,
       description="",
       long_description="""\
@@ -17,6 +17,7 @@ setup(name='pleiades.keytree',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
       include_package_data=True,
       zip_safe=False,
+      test_suite='keytree.tests.test_suite',
       install_requires=[
           # -*- Extra requirements: -*-
       ],

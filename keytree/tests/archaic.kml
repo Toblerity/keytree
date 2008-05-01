@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://earth.google.com/kml/2.1">
+  
+
+  <Document>
+    <Style id="defaultStyle">
+      <LineStyle>
+        <color>ffff0000</color>
+        <width>2</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>33ff0000</color>
+      </PolyStyle>
+    </Style>
+    <name>Archaic (pre-550 bc)</name>
+    <visibility>0</visibility>
+    <open>0</open>
+    <Placemark>
+      <name>Apollonia/Sozousa/Portus Cyrenorum</name>
+      
+      <description>
+        <![CDATA[
+          <div>
+            <p>
+              <span>An ancient settlement, attested during the Archaic, Classical, Hellenistic (Roman Republic), Roman and Late Antique periods (modern location: Marsa Susa). It was known in antiquity by the names: Apollonia, Sozousa and Portus Cyrenorum.</span>
+              <img align="right" valign="top" hspace="4" width="149" src="http://pleiades.stoa.org/images/awmcrose.png"/>
+            </p>
+            <br clear="right"/>
+            <p>URL: 
+              <a href="http://pleiades.stoa.org/places/373732">http://pleiades.stoa.org/places/373732</a>
+            </p>
+            <br clear="right"/>
+            <p>
+              <a href="http://pleiades.stoa.org">Pleiades</a> is hosted by the 
+              <a href="http://www.stoa.org/?page_id=519">Stoa Consortium for Electronic Publication in the Humanities</a>
+              and sponsored by the <a href="http://www.neh.gov">National Endowment for the Humanities</a>.
+            </p>
+          </div>
+        ]]>
+      </description>
+    
+      <styleUrl>#defaultStyle</styleUrl>
+      
+      <Point>
+        <coordinates>21.972500,32.896300,0.000000</coordinates>
+      </Point>
+      
+      
+    
+    </Placemark>
+    <Placemark>
+      <name>Arsinoe/Taucheira/Teucheira</name>
+      
+      <description>
+        <![CDATA[
+          <div>
+            <p>
+              <span>An ancient settlement, attested during the Archaic, Classical, Hellenistic (Roman Republic), Roman and Late Antique periods (modern location: Tocra). It was known in antiquity by the names: Arsinoe, Taucheira and Teucheira.</span>
+              <img align="right" valign="top" hspace="4" width="149" src="http://pleiades.stoa.org/images/awmcrose.png"/>
+            </p>
+            <br clear="right"/>
+            <p>URL: 
+              <a href="http://pleiades.stoa.org/places/373736">http://pleiades.stoa.org/places/373736</a>
+            </p>
+            <br clear="right"/>
+            <p>
+              <a href="http://pleiades.stoa.org">Pleiades</a> is hosted by the 
+              <a href="http://www.stoa.org/?page_id=519">Stoa Consortium for Electronic Publication in the Humanities</a>
+              and sponsored by the <a href="http://www.neh.gov">National Endowment for the Humanities</a>.
+            </p>
+          </div>
+        ]]>
+      </description>
+    
+      <styleUrl>#defaultStyle</styleUrl>
+      
+      <Point>
+        <coordinates>20.560300,32.535400,0.000000</coordinates>
+      </Point>
+      
+      
+    
+    </Placemark>
+    <Placemark>
+      <name>Artamis</name>
+      
+      <description>
+        <![CDATA[
+          <div>
+            <p>
+              <span>An ancient settlement, attested during the Archaic, Classical, Hellenistic (Roman Republic), Roman and Late Antique periods (modern location: Messa). It was known in antiquity by the name: Artamis.</span>
+              <img align="right" valign="top" hspace="4" width="149" src="http://pleiades.stoa.org/images/awmcrose.png"/>
+            </p>
+            <br clear="right"/>
+            <p>URL: 
+              <a href="http://pleiades.stoa.org/places/373737">http://pleiades.stoa.org/places/373737</a>
+            </p>
+            <br clear="right"/>
+            <p>
+              <a href="http://pleiades.stoa.org">Pleiades</a> is hosted by the 
+              <a href="http://www.stoa.org/?page_id=519">Stoa Consortium for Electronic Publication in the Humanities</a>
+              and sponsored by the <a href="http://www.neh.gov">National Endowment for the Humanities</a>.
+            </p>
+          </div>
+        ]]>
+      </description>
+    
+      <styleUrl>#defaultStyle</styleUrl>
+      
+      <Point>
+        <coordinates>21.621800,32.755200,0.000000</coordinates>
+      </Point>
+      
+      
+    
+    </Placemark>
+    <Placemark>
+      <name>Aspendos/Primoupolis</name>
+      
+      <description>
+        <![CDATA[
+          <div>
+            <p>
+              <span>An ancient settlement, attested during the Archaic, Classical, Hellenistic (Roman Republic), Roman and Late Antique periods (modern location: Belkis). It was known in antiquity by the names: Aspendos and Primoupolis.</span>
+              <img align="right" valign="top" hspace="4" width="149" src="http://pleiades.stoa.org/images/awmcrose.png"/>
+            </p>
+            <br clear="right"/>
+            <p>URL: 
+              <a href="http://pleiades.stoa.org/places/638776">http://pleiades.stoa.org/places/638776</a>
+            </p>
+            <br clear="right"/>
+            <p>
+              <a href="http://pleiades.stoa.org">Pleiades</a> is hosted by the 
+              <a href="http://www.stoa.org/?page_id=519">Stoa Consortium for Electronic Publication in the Humanities</a>
+              and sponsored by the <a href="http://www.neh.gov">National Endowment for the Humanities</a>.
+            </p>
+          </div>
+        ]]>
+      </description>
+    
+      <styleUrl>#defaultStyle</styleUrl>
+      
+      <Point>
+        <coordinates>31.173200,36.938200,0.000000</coordinates>
+      </Point>
+      
+      
+    
+    </Placemark>
+    <Placemark>
+      <name>Aziris/Azurion</name>
+      
+      <description>
+        <![CDATA[
+          <div>
+            <p>
+              <span>An ancient settlement, attested during the Archaic, Classical, Hellenistic (Roman Republic), Roman? and Late Antique periods (modern location: Wadi el-Chalig). It was known in antiquity by the names: Aziris and Azurion.</span>
+              <img align="right" valign="top" hspace="4" width="149" src="http://pleiades.stoa.org/images/awmcrose.png"/>
+            </p>
+            <br clear="right"/>
+            <p>URL: 
+              <a href="http://pleiades.stoa.org/places/373746">http://pleiades.stoa.org/places/373746</a>
+            </p>
+            <br clear="right"/>
+            <p>
+              <a href="http://pleiades.stoa.org">Pleiades</a> is hosted by the 
+              <a href="http://www.stoa.org/?page_id=519">Stoa Consortium for Electronic Publication in the Humanities</a>
+              and sponsored by the <a href="http://www.neh.gov">National Endowment for the Humanities</a>.
+            </p>
+          </div>
+        ]]>
+      </description>
+    
+      <styleUrl>#defaultStyle</styleUrl>
+      
+      <Point>
+        <coordinates>22.880600,32.683800,0.000000</coordinates>
+      </Point>
+      
+      
+    
+    </Placemark>
+    <Placemark>
+      <name>Cyrene/Claudiopolis</name>
+      
+      <description>
+        <![CDATA[
+          <div>
+            <p>
+              <span>An ancient settlement, attested during the Archaic, Classical, Hellenistic (Roman Republic), Roman and Late Antique periods (modern location: Ain Shahat, Grennah). It was known in antiquity by the names: Cyrene and Claudiopolis.</span>
+              <img align="right" valign="top" hspace="4" width="149" src="http://pleiades.stoa.org/images/awmcrose.png"/>
+            </p>
+            <br clear="right"/>
+            <p>URL: 
+              <a href="http://pleiades.stoa.org/places/373778">http://pleiades.stoa.org/places/373778</a>
+            </p>
+            <br clear="right"/>
+            <p>
+              <a href="http://pleiades.stoa.org">Pleiades</a> is hosted by the 
+              <a href="http://www.stoa.org/?page_id=519">Stoa Consortium for Electronic Publication in the Humanities</a>
+              and sponsored by the <a href="http://www.neh.gov">National Endowment for the Humanities</a>.
+            </p>
+          </div>
+        ]]>
+      </description>
+    
+      <styleUrl>#defaultStyle</styleUrl>
+      
+      <Point>
+        <coordinates>21.869000,32.825300,0.000000</coordinates>
+      </Point>
+      
+      
+    
+    </Placemark>
+    <Placemark>
+      <name>Darnis/Darne</name>
+      
+      <description>
+        <![CDATA[
+          <div>
+            <p>
+              <span>An ancient settlement, attested during the Archaic, Classical, Hellenistic (Roman Republic), Roman and Late Antique periods (modern location: Derna). It was known in antiquity by the names: Darnis and Darne.</span>
+              <img align="right" valign="top" hspace="4" width="149" src="http://pleiades.stoa.org/images/awmcrose.png"/>
+            </p>
+            <br clear="right"/>
+            <p>URL: 
+              <a href="http://pleiades.stoa.org/places/373780">http://pleiades.stoa.org/places/373780</a>
+            </p>
+            <br clear="right"/>
+            <p>
+              <a href="http://pleiades.stoa.org">Pleiades</a> is hosted by the 
+              <a href="http://www.stoa.org/?page_id=519">Stoa Consortium for Electronic Publication in the Humanities</a>
+              and sponsored by the <a href="http://www.neh.gov">National Endowment for the Humanities</a>.
+            </p>
+          </div>
+        ]]>
+      </description>
+    
+      <styleUrl>#defaultStyle</styleUrl>
+      
+      <Point>
+        <coordinates>22.643700,32.770000,0.000000</coordinates>
+      </Point>
+      
+      
+    
+    </Placemark>
+    <Placemark>
+      <name>Euesperides/Euesperites</name>
+      
+      <description>
+        <![CDATA[
+          <div>
+            <p>
+              <span>An ancient settlement, attested during the Archaic, Classical, Hellenistic (Roman Republic) and Roman? periods (modern location: Benghazi). It was known in antiquity by the names: Euesperides and Euesperites.</span>
+              <img align="right" valign="top" hspace="4" width="149" src="http://pleiades.stoa.org/images/awmcrose.png"/>
+            </p>
+            <br clear="right"/>
+            <p>URL: 
+              <a href="http://pleiades.stoa.org/places/373786">http://pleiades.stoa.org/places/373786</a>
+            </p>
+            <br clear="right"/>
+            <p>
+              <a href="http://pleiades.stoa.org">Pleiades</a> is hosted by the 
+              <a href="http://www.stoa.org/?page_id=519">Stoa Consortium for Electronic Publication in the Humanities</a>
+              and sponsored by the <a href="http://www.neh.gov">National Endowment for the Humanities</a>.
+            </p>
+          </div>
+        ]]>
+      </description>
+    
+      <styleUrl>#defaultStyle</styleUrl>
+      
+      <Point>
+        <coordinates>20.084400,32.128400,0.000000</coordinates>
+      </Point>
+      
+      
+    
+    </Placemark>
+    <Placemark>
+      <name>Phaia</name>
+      
+      <description>
+        <![CDATA[
+          <div>
+            <p>
+              <span>An ancient settlement, attested during the Archaic, Classical and Hellenistic (Roman Republic)? periods (modern location: Bomba?). It was known in antiquity by the name: Phaia.</span>
+              <img align="right" valign="top" hspace="4" width="149" src="http://pleiades.stoa.org/images/awmcrose.png"/>
+            </p>
+            <br clear="right"/>
+            <p>URL: 
+              <a href="http://pleiades.stoa.org/places/373870">http://pleiades.stoa.org/places/373870</a>
+            </p>
+            <br clear="right"/>
+            <p>
+              <a href="http://pleiades.stoa.org">Pleiades</a> is hosted by the 
+              <a href="http://www.stoa.org/?page_id=519">Stoa Consortium for Electronic Publication in the Humanities</a>
+              and sponsored by the <a href="http://www.neh.gov">National Endowment for the Humanities</a>.
+            </p>
+          </div>
+        ]]>
+      </description>
+    
+      <styleUrl>#defaultStyle</styleUrl>
+      
+      <Point>
+        <coordinates>23.091300,32.431400,0.000000</coordinates>
+      </Point>
+      
+      
+    
+    </Placemark>
+    <Placemark>
+      <name>Plateia</name>
+      
+      <description>
+        <![CDATA[
+          <div>
+            <p>
+              <span>An ancient settlement, attested during the Archaic and Late Antique? periods (modern location: Gasr el-Bomba?). It was known in antiquity by the name: Plateia.</span>
+              <img align="right" valign="top" hspace="4" width="149" src="http://pleiades.stoa.org/images/awmcrose.png"/>
+            </p>
+            <br clear="right"/>
+            <p>URL: 
+              <a href="http://pleiades.stoa.org/places/373874">http://pleiades.stoa.org/places/373874</a>
+            </p>
+            <br clear="right"/>
+            <p>
+              <a href="http://pleiades.stoa.org">Pleiades</a> is hosted by the 
+              <a href="http://www.stoa.org/?page_id=519">Stoa Consortium for Electronic Publication in the Humanities</a>
+              and sponsored by the <a href="http://www.neh.gov">National Endowment for the Humanities</a>.
+            </p>
+          </div>
+        ]]>
+      </description>
+    
+      <styleUrl>#defaultStyle</styleUrl>
+      
+      <Point>
+        <coordinates>23.123700,32.401600,0.000000</coordinates>
+      </Point>
+      
+      
+    
+    </Placemark>
+    <Placemark>
+      <name>Ptolemais/Barkes Limen</name>
+      
+      <description>
+        <![CDATA[
+          <div>
+            <p>
+              <span>An ancient settlement, attested during the Archaic, Classical, Hellenistic (Roman Republic), Roman and Late Antique periods (modern location: Tolmeta / Tulmeitia). It was known in antiquity by the names: Ptolemais and Barkes Limen.</span>
+              <img align="right" valign="top" hspace="4" width="149" src="http://pleiades.stoa.org/images/awmcrose.png"/>
+            </p>
+            <br clear="right"/>
+            <p>URL: 
+              <a href="http://pleiades.stoa.org/places/373879">http://pleiades.stoa.org/places/373879</a>
+            </p>
+            <br clear="right"/>
+            <p>
+              <a href="http://pleiades.stoa.org">Pleiades</a> is hosted by the 
+              <a href="http://www.stoa.org/?page_id=519">Stoa Consortium for Electronic Publication in the Humanities</a>
+              and sponsored by the <a href="http://www.neh.gov">National Endowment for the Humanities</a>.
+            </p>
+          </div>
+        ]]>
+      </description>
+    
+      <styleUrl>#defaultStyle</styleUrl>
+      
+      <Point>
+        <coordinates>20.946400,32.708000,0.000000</coordinates>
+      </Point>
+      
+      
+    
+    </Placemark>
+  </Document>
+</kml>
+

@@ -1,0 +1,10 @@
+Test Placemark elements wrapped as features
+===========================================
+
+    >>> kmlfile = open_file('archaic.kml')
+    >>> from elementtree import ElementTree as etree
+    >>> kmltree = etree.parse(kmlfile)
+    >>> placemarks = [p for p in kmltree.findall('*/{http://earth.google.com/kml/2.1}Placemark')]
+    >>> len(placemarks)
+    11
+
