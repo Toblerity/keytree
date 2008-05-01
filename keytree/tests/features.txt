@@ -8,3 +8,15 @@ Test Placemark elements wrapped as features
     >>> len(placemarks)
     11
 
+    >>> from keytree import feature
+    >>> f = feature(placemarks[0])
+    >>> f.geometry.type
+    'Point'
+    >>> print f.geometry.coordinates
+    (21.9725, 32.89629..., 0.0)
+    >>> gi = f.__geo_interface__
+    >>> gi['geometry']['type']
+    'Point'
+    >>> print gi['geometry']['coordinates']
+    (21.9725, 32.89629..., 0.0)
+
