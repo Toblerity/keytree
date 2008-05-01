@@ -23,9 +23,16 @@ class Geometry(object):
 
 class Feature(object):
 
-    def __init__(self, geometry):
+    def __init__(self, kid=None, geometry=None, properties=None, **kw):
+        self.id = kid
         self.geometry = geometry
+        self.properties = properties or {}
+        self.properties.update(kw)
 
     @property
     def __geo_interface__(self):
-        return dict(geometry=self.geometry.__geo_interface__)
+        return dict(
+            id=self.id,
+            geometry=self.geometry.__geo_interface__,
+            properties=dict(self.properties)
+            )

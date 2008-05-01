@@ -1,22 +1,98 @@
 Test Placemark elements wrapped as features
 ===========================================
 
-    >>> kmlfile = open_file('archaic.kml')
+    >>> kml = """<?xml version="1.0" encoding="UTF-8"?>
+    ... <kml xmlns="http://www.opengis.net/kml/2.2">
+    ...   <Document>
+    ...     <Placemark>
+    ...       <name>point</name>
+    ...       <description>Point test</description>
+    ...       <Point>
+    ...         <coordinates>
+    ...           -122.364383,37.824664,0
+    ...         </coordinates>
+    ...       </Point>
+    ...     </Placemark>
+    ...     <Placemark>
+    ...       <name>line string</name>
+    ...       <description>LineString test</description>
+    ...       <LineString>
+    ...         <coordinates>
+    ...           -122.364383,37.824664,0 -122.364152,37.824322,0 
+    ...         </coordinates>
+    ...       </LineString>
+    ...     </Placemark>
+    ...     <Placemark>
+    ...       <name>polygon</name>
+    ...       <description>Polygon test</description>
+    ...       <Polygon>
+    ...         <outerBoundaryIs>
+    ...           <LinearRing>
+    ...             <coordinates>
+    ...             -122.366278,37.818844,30
+    ...             -122.365248,37.819267,30
+    ...             -122.365640,37.819861,30
+    ...             -122.366669,37.819429,30
+    ...             -122.366278,37.818844,30
+    ...             </coordinates>
+    ...           </LinearRing>
+    ...         </outerBoundaryIs>
+    ...         <innerBoundaryIs>
+    ...           <LinearRing>
+    ...             <coordinates>
+    ...             -122.366212,37.818977,30
+    ...             -122.365424,37.819294,30
+    ...             -122.365704,37.819731,30
+    ...             -122.366488,37.819402,30
+    ...             -122.366212,37.818977,30
+    ...             </coordinates>
+    ...           </LinearRing>
+    ...         </innerBoundaryIs>
+    ...       </Polygon>
+    ...     </Placemark>
+    ...   </Document>
+    ... </kml>"""
+
     >>> from elementtree import ElementTree as etree
-    >>> kmltree = etree.parse(kmlfile)
-    >>> placemarks = [p for p in kmltree.findall('*/{http://earth.google.com/kml/2.1}Placemark')]
-    >>> len(placemarks)
-    11
+    >>> kmltree = etree.fromstring(kml)
+    >>> placemarks = [p for p in kmltree.findall('*/{http://www.opengis.net/kml/2.2}Placemark')]
 
     >>> from keytree import feature
     >>> f = feature(placemarks[0])
     >>> f.geometry.type
     'Point'
     >>> print f.geometry.coordinates
-    (21.9725, 32.89629..., 0.0)
+    (-122.36438..., 37.82466..., 0.0)
     >>> gi = f.__geo_interface__
     >>> gi['geometry']['type']
     'Point'
     >>> print gi['geometry']['coordinates']
-    (21.9725, 32.89629..., 0.0)
+    (-122.36438..., 37.82466..., 0.0)
+    >>> gi['properties']['name']
+    'point'
+    >>> gi['properties']['description']
+    'Point test'
 
+    >>> f = feature(placemarks[1])
+    >>> f.geometry.type
+    'LineString'
+    >>> print f.geometry.coordinates
+    ((-122.36438..., 37.82466..., 0.0), (-122.36415..., 37.82432..., 0.0))
+    >>> gi = f.__geo_interface__
+    >>> gi['geometry']['type']
+    'LineString'
+    >>> print gi['geometry']['coordinates']
+    ((-122.36438..., 37.82466..., 0.0), (-122.36415..., 37.82432..., 0.0))
+    >>> gi['properties']['name']
+    'line string'
+    >>> gi['properties']['description']
+    'LineString test'
+
+    >>> f = feature(placemarks[2])
+    >>> f.geometry.type
+    'Polygon'
+    >>> shell, hole = f.geometry.coordinates
+    >>> print shell
+    ((-122.36627..., 37.81884..., 30.0), ...)
+    >>> print hole
+    ((-122.366212, 37.81897..., 30.0), ...)

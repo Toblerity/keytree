@@ -1,0 +1,21 @@
+Test Placemark elements wrapped as features
+===========================================
+
+    >>> kmlfile = open_file('archaic.kml')
+    >>> from elementtree import ElementTree as etree
+    >>> kmltree = etree.parse(kmlfile)
+    >>> kmlns = kmltree.getroot().tag.split('}')[0][1:]
+    >>> placemarks = [p for p in kmltree.findall('*/{%s}Placemark' % kmlns)]
+    >>> from keytree import feature
+    >>> f = feature(placemarks[0])
+    >>> f.geometry.type
+    'Point'
+    >>> print f.geometry.coordinates
+    (21.9725, 32.896..., 0.0)
+    >>> gi = f.__geo_interface__
+    >>> gi['geometry']['type']
+    'Point'
+    >>> print gi['geometry']['coordinates']
+    (21.9725, 32.896..., 0.0)
+    >>> gi['properties']['name']
+    'Apollonia/Sozousa/Portus Cyrenorum'
