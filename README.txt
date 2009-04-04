@@ -33,17 +33,20 @@ Keytree provides several functions for manipulating KML using the ElementTree AP
 Objects that provide the Python geo interface can also be converted to ElementTree API Elements::
 
   >>> from geojson import Feature
-  >>> f = Feature('1', geometry={'type': 'Point', 'coordinates': (-122.364383, 37.824663999999999)}, title='Feature 1', summary='The first feature', content='Blah, blah, blah.')
+  >>> f = Feature('1', 
+  ...             geometry={
+  ...                 'type': 'Point', 
+  ...                 'coordinates': (-122.364383, 37.824663999999999)
+  ...                 },
+  ...             title='Feature 1', 
+  ...             summary='The first feature', 
+  ...             content='Blah, blah, blah.'
+  ...             )
   
 The first argument to the keytree.element function is an XML context, the created element will have the same namespaces as that element::
 
   >>> elem = keytree.element(tree, f)
   >>> print list(elem)
-  [<Element name at ...>, <Element Snippet at ...>, <Element description at ...>, <Element Point at ...>]
-  >>> ElementTree.tostring(elem)
-  '<Placemark id="1"><name>Feature 1</name><Snippet>The first feature</Snippet><description>Blah, blah, blah.</description><Point><coordinates>0.000000,0.000000,0.0</coordinates></Point></Placemark>'
-  
-
-
+  [<Element name ...>, <Element Snippet ...>, <Element description ...>, <Element Point  ...>]
 
 
