@@ -9,7 +9,7 @@ def element(context, ob, **kw):
       >>> from xml.etree import ElementTree
       >>> tree = ElementTree.fromstring(kml)
       >>> doc = tree[0]
-      >>> doc
+      >>> doc # doctest: +ELLIPSIS
       <Element {http://www.opengis.net/kml/2.2}Document at ...>
     
     First, with a geometry:
@@ -26,7 +26,7 @@ def element(context, ob, **kw):
       >>> from keytree.model import Feature
       >>> f = Feature('1', geometry=g, title='Feature 1', summary='The first feature', content='Blah, blah, blah.')
       >>> elem = element(doc, f)
-      >>> print list(elem)
+      >>> list(elem) # doctest: +ELLIPSIS
       [<Element name at ...>, <Element Snippet at ...>, <Element description at ...>, <Element Point at ...>]
       >>> ElementTree.tostring(elem)
       '<Placemark id="1"><name>Feature 1</name><Snippet>The first feature</Snippet><description>Blah, blah, blah.</description><Point><coordinates>0.000000,0.000000,0.0</coordinates></Point></Placemark>'
