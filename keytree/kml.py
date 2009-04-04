@@ -28,7 +28,6 @@ def element(context, ob, **kw):
       >>> elem = element(doc, f)
       >>> print list(elem)
       [<Element name at ...>, <Element Snippet at ...>, <Element description at ...>, <Element Point at ...>]
-      >>> import pdb; pdb.set_trace()
       >>> ElementTree.tostring(elem)
       '<Placemark id="1"><name>Feature 1</name><Snippet>The first feature</Snippet><description>Blah, blah, blah.</description><Point><coordinates>0.000000,0.000000,0.0</coordinates></Point></Placemark>'
       
