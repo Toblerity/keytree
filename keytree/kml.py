@@ -1,7 +1,18 @@
+"""
+Factories for KML elements
+"""
 
 def element(context, ob, **kw):
-    """Make a KML element by calling context.makeelement and fleshing it out
-    with data from the provided object and keyword arguments.
+    """Make a KML element from an object that provides the Python geo   
+    interface.
+    
+    Calls context.makeelement and fleshes out the new element using properties
+    of the object or keyword arguments.
+    
+    KML Placemark names derive from object 'title' properties or a 'name'   
+    argument. Snippets derive from object 'summary' properties or a 'snippet' 
+    argument. Descriptions derive from object 'content' properties or a 
+    'description' argument.
     
     Example:
       
@@ -18,28 +29,47 @@ def element(context, ob, **kw):
       >>> from keytree.model import Geometry
       >>> g = Geometry('Point', (0.0, 0.0))
       >>> elem = element(doc, g)
-      >>> ElementTree.tostring(elem)
-      '<Point><coordinates>0.000000,0.000000,0.0</coordinates></Point>'
+      >>> import pprint
+      >>> pprint.pprint((elem.tag, elem.text, list(elem))) # doctest: +ELLIPSIS
+      ('{http://www.opengis.net/kml/2.2}Point',
+       None,
+       [<Element {http://www.opengis.net/kml/2.2}coordinates at ...>])
     
     Placemark:
       
       >>> from keytree.model import Feature
       >>> f = Feature('1', geometry=g, title='Feature 1', summary='The first feature', content='Blah, blah, blah.')
       >>> elem = element(doc, f)
-      >>> list(elem) # doctest: +ELLIPSIS
-      [<Element name at ...>, <Element Snippet at ...>, <Element description at ...>, <Element Point at ...>]
-      >>> ElementTree.tostring(elem)
-      '<Placemark id="1"><name>Feature 1</name><Snippet>The first feature</Snippet><description>Blah, blah, blah.</description><Point><coordinates>0.000000,0.000000,0.0</coordinates></Point></Placemark>'
-      
+      >>> import pprint
+      >>> pprint.pprint((elem.tag, elem.text, list(elem))) # doctest: +ELLIPSIS
+      ('{http://www.opengis.net/kml/2.2}Placemark',
+       None,
+       [<Element {http://www.opengis.net/kml/2.2}name at ...>,
+        <Element {http://www.opengis.net/kml/2.2}Snippet at ...>,
+        <Element {http://www.opengis.net/kml/2.2}description at ...>,
+        <Element {http://www.opengis.net/kml/2.2}Point at ...>])
+      >>> pprint.pprint(list((e.tag, e.text, list(e)) for e in elem)) # doctest: +ELLIPSIS
+      [('{http://www.opengis.net/kml/2.2}name', 'Feature 1', []),
+       ('{http://www.opengis.net/kml/2.2}Snippet', 'The first feature', []),
+       ('{http://www.opengis.net/kml/2.2}description', 'Blah, blah, blah.', []),
+       ('{http://www.opengis.net/kml/2.2}Point',
+        None,
+        [<Element {http://www.opengis.net/kml/2.2}coordinates at ...>])]
+    
     """
     ns = context.tag.split('}')[0][1:]
     geo = getattr(ob, '__geo_interface__') or ob
     if geo.has_key('id') or geo.has_key('geometry'): # is a feature
-        elem = placemark_element(context, geo, **kw)
+        elem = placemark_element(context, ns, geo, **kw)
     elif geo.has_key('type'): # is a geometry
-        elem = geometry_element(context, geo)
+        elem = geometry_element(context, ns, geo)
     return elem
 
+def subelement(parent, ob, **kw):
+    """Append new element to the parent element.
+    """
+    parent.append(element(parent, ob, **kw))
+    
 def coords_to_kml(geom):
     gtype = geom['type']
     if gtype == 'Point':
@@ -56,30 +86,30 @@ def coords_to_kml(geom):
         raise ValueError, "Invalid dimensions"
     return ' '.join(tuples)
 
-def geometry_element(context, ob):
+def geometry_element(context, ns, ob):
     gtype = ob['type']
-    geom_elem = context.makeelement(gtype, {})
+    geom_elem = context.makeelement('{%s}%s' % (ns, gtype), {})
     if gtype in ['Point', 'LineString']:
-        sub_coords_elem = context.makeelement('coordinates', {})
+        sub_coords_elem = context.makeelement('{%s}coordinates' % ns, {})
         sub_coords_elem.text = coords_to_kml(ob)
     else:
         pass
     geom_elem.append(sub_coords_elem)
     return geom_elem
 
-def placemark_element(context, ob, **kw):
-    pm_elem = context.makeelement('Placemark', {})
+def placemark_element(context, ns, ob, **kw):
+    pm_elem = context.makeelement('{%s}Placemark' % ns, {})
     pm_elem.attrib['id'] = ob.get('id') or kw.get('id')
-    sub_name_elem = context.makeelement('name', {})
+    sub_name_elem = context.makeelement('{%s}name' % ns, {})
     sub_name_elem.text = ob.get('properties', {}).get('title') or kw.get('name')
     pm_elem.append(sub_name_elem)
-    sub_snippet_elem = context.makeelement('Snippet', {})
+    sub_snippet_elem = context.makeelement('{%s}Snippet' % ns, {})
     sub_snippet_elem.text = ob.get('properties', {}).get('summary') or kw.get('snippet')
     pm_elem.append(sub_snippet_elem)
-    sub_description_elem = context.makeelement('description', {})
+    sub_description_elem = context.makeelement('{%s}description' % ns, {})
     sub_description_elem.text = ob.get('properties', {}).get('content') or kw.get('description')
     pm_elem.append(sub_description_elem)
     if ob.has_key('geometry'):
-        sub_geom_elem = geometry_element(context, ob.get('geometry'))
+        sub_geom_elem = geometry_element(context, ns, ob.get('geometry'))
         pm_elem.append(sub_geom_elem)
     return pm_elem
