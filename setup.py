@@ -2,11 +2,15 @@ from setuptools import setup, find_packages
 import sys, os
 
 version = '0.2.1'
+try:
+    desc = open('README.rst', 'r').read()
+except:
+    desc = ''
 
 setup(name='keytree',
       version=version,
       description="KML utilities for the ElementTree API",
-      long_description=open('README.txt', 'r').read(),
+      long_description=desc,
       classifiers = [
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
