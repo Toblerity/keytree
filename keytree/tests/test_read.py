@@ -4,7 +4,7 @@ from xml.etree import ElementTree as etree
 
 from keytree import feature
 
-:wKML = """<?xml version="1.0" encoding="UTF-8"?>
+KML = """<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
     <Placemark>
