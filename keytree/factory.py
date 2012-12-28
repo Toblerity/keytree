@@ -9,15 +9,17 @@ def feature(element):
     kmlns = element.tag.split('}')[0][1:]
     kid = element.attrib.get('id')
     name = element.findtext('{%s}name' % kmlns)
-    summary = element.findtext('{%s}Snippet' % kmlns)
-    content = element.findtext('{%s}description' % kmlns)
+    snippet = element.findtext('{%s}Snippet' % kmlns)
+    description = element.findtext('{%s}description' % kmlns)
     for geom_type in GEOM_TYPES:
         tag = '{%s}%s' % (kmlns, geom_type)
         geom_element = element.find(tag)
         if geom_element is not None:
             g = geometry(geom_element)
-            return Feature(kid, g, name=name, summary=summary, content=content)
-    return Feature(kid, None, name=name, summary=summary, content=content)
+            return Feature(
+                kid, g, name=name, snippet=snippet, description=description )
+    return Feature(
+        kid, None, name=name, snippet=snippet, description=description )
 
 def geometry(element):
     tp = element.tag.split('}')

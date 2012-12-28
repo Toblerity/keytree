@@ -73,8 +73,8 @@ class FeatureReaderTestCase(TestCase):
         f = feature(self.placemarks[0])
         props = f.properties
         self.failUnless('name' in props['@context'])
-        self.failUnless('summary' in props['@context'])
-        self.failUnless('content' in props['@context'])
+        self.failUnless('snippet' in props['@context'])
+        self.failUnless('description' in props['@context'])
 
     def test_point(self):
         f = feature(self.placemarks[0])
@@ -85,10 +85,10 @@ class FeatureReaderTestCase(TestCase):
         self.failUnless(
             f.properties['name'] == f['properties']['name'] == 'point' )
         self.failUnless(
-            f.properties['summary'] == f['properties']['summary'] \
+            f.properties['snippet'] == f['properties']['snippet'] \
             == 'Point test' )
         self.failUnless(
-            f.properties['content'] == f['properties']['content'] \
+            f.properties['description'] == f['properties']['description'] \
             == 'Blah, blah, blah' )
 
     def test_linestring(self):
@@ -100,10 +100,10 @@ class FeatureReaderTestCase(TestCase):
         self.failUnless(
             f.properties['name'] == f['properties']['name'] == 'linestring' )
         self.failUnless(
-            f.properties['summary'] == f['properties']['summary'] \
+            f.properties['snippet'] == f['properties']['snippet'] \
             == 'LineString test' )
         self.failUnless(
-            f.properties['content'] == f['properties']['content'] \
+            f.properties['description'] == f['properties']['description'] \
             == 'Blah, blah, blah' )
 
     def test_polygon(self):
@@ -115,10 +115,10 @@ class FeatureReaderTestCase(TestCase):
         self.failUnless(
             f.properties['name'] == f['properties']['name'] == 'polygon' )
         self.failUnless(
-            f.properties['summary'] == f['properties']['summary'] \
+            f.properties['snippet'] == f['properties']['snippet'] \
             == 'Polygon test' )
         self.failUnless(
-            f.properties['content'] == f['properties']['content'] \
+            f.properties['description'] == f['properties']['description'] \
             == 'Blah, blah, blah' )
         coords1 = f.geometry.coordinates[1][0]
         self.failUnlessCoordsAlmostEqual(

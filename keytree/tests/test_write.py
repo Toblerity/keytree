@@ -14,24 +14,42 @@ KML = """<?xml version="1.0" encoding="UTF-8"?>
 class ElementWriterTestCase(TestCase):
     def setUp(self):
         self.doc = etree.fromstring(KML)
-    def failUnlessCoordsAlmostEqual(self, a, b, precision=7):
-        for x, y in zip(a, b):
-            self.failUnlessAlmostEqual(x, y, precision)
-
+    
     def test_element(self):
         f = {
             'id': '1',
             'geometry': {'type': 'Point', 'coordinates': (0.0, 0.0)},
             'properties': {
                 'title': 'one',
-                'summary': 'Point one' } }
+                'description': 'Point one' } }
         elem = element(self.doc, f)
         self.failUnlessEqual(
             elem.tag, '{http://www.opengis.net/kml/2.2}Placemark' )
+        self.failUnlessEqual(elem.attrib['id'], '1')
         self.failUnlessEqual(
             elem.find('{http://www.opengis.net/kml/2.2}name').text,
             'one' )
         self.failUnlessEqual(
+            elem.find('{http://www.opengis.net/kml/2.2}Snippet').text,
+            'Point one' )
+        self.failUnlessEqual(
             elem.find('{http://www.opengis.net/kml/2.2}Point').find(
                 '{http://www.opengis.net/kml/2.2}coordinates').text,
             '0.000000,0.000000,0.0' )
+
+    def test_element_kw(self):
+        f = {
+            'id': '1',
+            'geometry': {'type': 'Point', 'coordinates': (0.0, 0.0)},
+            'properties': {} }
+        elem = element(self.doc, f, name='one', snippet='Point one')
+        self.failUnlessEqual(
+            elem.tag, '{http://www.opengis.net/kml/2.2}Placemark' )
+        self.failUnlessEqual(elem.attrib['id'], '1')
+        self.failUnlessEqual(
+            elem.find('{http://www.opengis.net/kml/2.2}name').text,
+            'one' )
+        self.failUnlessEqual(
+            elem.find('{http://www.opengis.net/kml/2.2}Snippet').text,
+            'Point one' )
+

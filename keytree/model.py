@@ -11,9 +11,9 @@ GEOM_TYPES = [
     ]
 
 PROPERTIES_CONTEXT = {
-    'name': 'http://www.opengis.net/kml/2.2/name',
-    'summary': 'http://www.opengis.net/kml/2.2/Snippet',
-    'content': 'http://www.opengis.net/kml/2.2/description' }
+    'name': 'http://developers.google.com/kml/documentation/kmlreference#name',
+    'snippet': 'http://developers.google.com/kml/documentation/kmlreference#Snippet',
+    'description': 'http://developers.google.com/kml/documentation/kmlreference#description' }
 
 
 class Dictish(object):

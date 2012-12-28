@@ -101,13 +101,16 @@ def placemark_element(context, ns, ob, **kw):
     pm_elem = context.makeelement('{%s}Placemark' % ns, {})
     pm_elem.attrib['id'] = ob.get('id') or kw.get('id')
     sub_name_elem = context.makeelement('{%s}name' % ns, {})
-    sub_name_elem.text = ob.get('properties', {}).get('title') or kw.get('name')
+    sub_name_elem.text = kw.get('name') or ob.get(
+        'properties', {}).get('title')
     pm_elem.append(sub_name_elem)
     sub_snippet_elem = context.makeelement('{%s}Snippet' % ns, {})
-    sub_snippet_elem.text = ob.get('properties', {}).get('summary') or kw.get('snippet')
+    sub_snippet_elem.text = kw.get('snippet') or ob.get(
+        'properties', {}).get('description')
     pm_elem.append(sub_snippet_elem)
     sub_description_elem = context.makeelement('{%s}description' % ns, {})
-    sub_description_elem.text = ob.get('properties', {}).get('content') or kw.get('description')
+    sub_description_elem.text = kw.get('description') or ob.get(
+        'properties', {}).get('content')
     pm_elem.append(sub_description_elem)
     if ob.has_key('geometry'):
         sub_geom_elem = geometry_element(context, ns, ob.get('geometry'))
