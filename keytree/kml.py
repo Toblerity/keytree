@@ -1,6 +1,12 @@
 """
-Factories for KML elements
+Functions and factories for KML elements
 """
+
+def kml_ns(element):
+    return element.tag.split('}')[0][1:]
+
+def findall_placemarks(element):
+    return element.findall('*/{%s}Placemark' % kml_ns(element))
 
 def element(context, ob, **kw):
     """Make a KML element from an object that provides the Python geo   
@@ -116,3 +122,4 @@ def placemark_element(context, ns, ob, **kw):
         sub_geom_elem = geometry_element(context, ns, ob.get('geometry'))
         pm_elem.append(sub_geom_elem)
     return pm_elem
+

@@ -91,6 +91,17 @@ appended to its proper Document or Folder::
       </ns0:Placemark>
     </ns0:Document>
   </ns0:kml>
-  
+
+KML Helpers
+-----------
+
+The keytree.kml module contains a few useful utility functions::
+
+  >>> from keytree.kml import kml_ns, findall_placemarks
+  >>> print kml_ns(doc)
+  {http://www.opengis.net/kml/2.2}
+  >>> findall_placemarks(doc)
+  [<Element {http://www.opengis.net/kml/2.2}Placemark at ...>]
+
 .. _Shapely: http://pypi.python.org/pypi/Shapely
 
