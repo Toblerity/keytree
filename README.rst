@@ -1,7 +1,9 @@
 Keytree
 =======
 
-Keytree provides several functions for manipulating KML using the ElementTree API. Elements can be adapted to the Python geo interface and then used with packages like Shapely_::
+Keytree provides functions for reading and writing KML using the
+ElementTree API. Elements can be adapted to the Python geo interface and then
+used with packages like Shapely_::
 
   >>> data = """<?xml version="1.0" encoding="UTF-8"?>
   ... <kml xmlns="http://www.opengis.net/kml/2.2">

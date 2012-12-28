@@ -58,7 +58,7 @@ def element(context, ob, **kw):
     
     """
     ns = context.tag.split('}')[0][1:]
-    geo = getattr(ob, '__geo_interface__') or ob
+    geo = getattr(ob, '__geo_interface__', ob)
     if geo.has_key('id') or geo.has_key('geometry'): # is a feature
         elem = placemark_element(context, ns, geo, **kw)
     elif geo.has_key('type'): # is a geometry
