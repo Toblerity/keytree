@@ -89,7 +89,7 @@ def coords_to_kml(geom):
     elif len(coords[0]) == 3:
         tuples = ('%f,%f,%f' % tuple(c) for c in coords)
     else:
-        raise ValueError, "Invalid dimensions"
+        raise ValueError("Invalid dimensions")
     return ' '.join(tuples)
 
 def geometry_element(context, ns, ob):
