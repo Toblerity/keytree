@@ -1,8 +1,3 @@
-Eaze Fork
-=======
-
-The version of Keytree on PyPi has some minor syntax errors that make it incompatible with Python 3. This fork is a (hopefully temporary) workaround so that we can use it. Ideally we'll want to contribute these changes back into the main Keytree codebase.
-
 Keytree
 =======
 
