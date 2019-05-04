@@ -23,16 +23,16 @@ class ElementWriterTestCase(TestCase):
                 'title': 'one',
                 'description': 'Point one' } }
         elem = element(self.doc, f)
-        self.failUnlessEqual(
+        self.assertEqual(
             elem.tag, '{http://www.opengis.net/kml/2.2}Placemark' )
-        self.failUnlessEqual(elem.attrib['id'], '1')
-        self.failUnlessEqual(
+        self.assertEqual(elem.attrib['id'], '1')
+        self.assertEqual(
             elem.find('{http://www.opengis.net/kml/2.2}name').text,
             'one' )
-        self.failUnlessEqual(
+        self.assertEqual(
             elem.find('{http://www.opengis.net/kml/2.2}Snippet').text,
             'Point one' )
-        self.failUnlessEqual(
+        self.assertEqual(
             elem.find('{http://www.opengis.net/kml/2.2}Point').find(
                 '{http://www.opengis.net/kml/2.2}coordinates').text,
             '0.000000,0.000000,0.0' )
@@ -43,13 +43,13 @@ class ElementWriterTestCase(TestCase):
             'geometry': {'type': 'Point', 'coordinates': (0.0, 0.0)},
             'properties': {} }
         elem = element(self.doc, f, name='one', snippet='Point one')
-        self.failUnlessEqual(
+        self.assertEqual(
             elem.tag, '{http://www.opengis.net/kml/2.2}Placemark' )
-        self.failUnlessEqual(elem.attrib['id'], '1')
-        self.failUnlessEqual(
+        self.assertEqual(elem.attrib['id'], '1')
+        self.assertEqual(
             elem.find('{http://www.opengis.net/kml/2.2}name').text,
             'one' )
-        self.failUnlessEqual(
+        self.assertEqual(
             elem.find('{http://www.opengis.net/kml/2.2}Snippet').text,
             'Point one' )
 

@@ -72,52 +72,52 @@ class FeatureReaderTestCase(TestCase):
     def test_properties_context(self):
         f = feature(self.placemarks[0])
         props = f.properties
-        self.failUnless('name' in props['@context'])
-        self.failUnless('snippet' in props['@context'])
-        self.failUnless('description' in props['@context'])
+        self.assertTrue('name' in props['@context'])
+        self.assertTrue('snippet' in props['@context'])
+        self.assertTrue('description' in props['@context'])
 
     def test_point(self):
         f = feature(self.placemarks[0])
-        self.failUnless(f.geometry.type == f['geometry']['type'] == 'Point')
+        self.assertTrue(f.geometry.type == f['geometry']['type'] == 'Point')
         coords = f.geometry.coordinates
         self.failUnlessCoordsAlmostEqual(
             coords, (-122.36438, 37.82466, 0.0), 5 )
-        self.failUnless(
+        self.assertTrue(
             f.properties['name'] == f['properties']['name'] == 'point' )
-        self.failUnless(
+        self.assertTrue(
             f.properties['snippet'] == f['properties']['snippet'] \
             == 'Point test' )
-        self.failUnless(
+        self.assertTrue(
             f.properties['description'] == f['properties']['description'] \
             == 'Blah, blah, blah' )
 
     def test_linestring(self):
         f = feature(self.placemarks[1])
-        self.failUnless(f.geometry.type == f['geometry']['type'] == 'LineString')
+        self.assertTrue(f.geometry.type == f['geometry']['type'] == 'LineString')
         coords0 = f.geometry.coordinates[0]
         self.failUnlessCoordsAlmostEqual(
             coords0, (-122.36438, 37.82466, 0.0), 5 )
-        self.failUnless(
+        self.assertTrue(
             f.properties['name'] == f['properties']['name'] == 'linestring' )
-        self.failUnless(
+        self.assertTrue(
             f.properties['snippet'] == f['properties']['snippet'] \
             == 'LineString test' )
-        self.failUnless(
+        self.assertTrue(
             f.properties['description'] == f['properties']['description'] \
             == 'Blah, blah, blah' )
 
     def test_polygon(self):
         f = feature(self.placemarks[2])
-        self.failUnless(f.geometry.type == f['geometry']['type'] == 'Polygon')
+        self.assertTrue(f.geometry.type == f['geometry']['type'] == 'Polygon')
         coords0 = f.geometry.coordinates[0][0]
         self.failUnlessCoordsAlmostEqual(
             coords0, (-122.366278, 37.81884, 30.0), 5 )
-        self.failUnless(
+        self.assertTrue(
             f.properties['name'] == f['properties']['name'] == 'polygon' )
-        self.failUnless(
+        self.assertTrue(
             f.properties['snippet'] == f['properties']['snippet'] \
             == 'Polygon test' )
-        self.failUnless(
+        self.assertTrue(
             f.properties['description'] == f['properties']['description'] \
             == 'Blah, blah, blah' )
         coords1 = f.geometry.coordinates[1][0]

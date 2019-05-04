@@ -118,7 +118,7 @@ def placemark_element(context, ns, ob, **kw):
     sub_description_elem.text = kw.get('description') or ob.get(
         'properties', {}).get('content')
     pm_elem.append(sub_description_elem)
-    if ob.has_key('geometry'):
+    if 'geometry' in ob:
         sub_geom_elem = geometry_element(context, ns, ob.get('geometry'))
         pm_elem.append(sub_geom_elem)
     return pm_elem
