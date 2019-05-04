@@ -69,7 +69,7 @@ class FeatureReaderTestCase(TestCase):
 
     def failUnlessCoordsAlmostEqual(self, a, b, precision=7):
         for x, y in zip(a, b):
-            self.failUnlessAlmostEqual(x, y, precision)
+            self.assertAlmostEqual(x, y, precision)
 
     def test_properties_context(self):
         f = feature(self.placemarks[0])
