@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '0.3.0'
+version = '1.0.0'
 try:
     desc = open('README.rst', 'r').read()
 except:
@@ -12,7 +12,7 @@ setup(name='keytree',
       description="KML utilities for the ElementTree API",
       long_description=desc,
       classifiers = [
-        'Development Status :: 4 - Beta',
+        'Development Status :: 6 - Mature',
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: BSD License',
@@ -22,8 +22,8 @@ setup(name='keytree',
         ],
       keywords='KML etree ElementTree',
       author='Sean Gillies',
-      author_email='sgillies@frii.com',
-      url='http://atlantides.org/svn/pleiades/pleiades.keytree',
+      author_email='sean.gillies@gmail.com',
+      url='https://github.com/Toblerity/keytree',
       license='BSD',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
       include_package_data=True,
