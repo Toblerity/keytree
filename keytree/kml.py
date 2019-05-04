@@ -2,11 +2,14 @@
 Functions and factories for KML elements
 """
 
+
 def kml_ns(element):
-    return element.tag.split('}')[0][1:]
+    return element.tag.split("}")[0][1:]
+
 
 def findall_placemarks(element):
-    return element.findall('*/{%s}Placemark' % kml_ns(element))
+    return element.findall("*/{%s}Placemark" % kml_ns(element))
+
 
 def element(context, ob, **kw):
     """Make a KML element from an object that provides the Python geo   
@@ -63,63 +66,67 @@ def element(context, ob, **kw):
         [<Element {http://www.opengis.net/kml/2.2}coordinates at ...>])]
     
     """
-    ns = context.tag.split('}')[0][1:]
-    geo = getattr(ob, '__geo_interface__', ob)
-    if 'geometry' in geo: # is a feature
+    ns = context.tag.split("}")[0][1:]
+    geo = getattr(ob, "__geo_interface__", ob)
+    if "geometry" in geo:  # is a feature
         elem = placemark_element(context, ns, geo, **kw)
-    elif 'coordinates' in geo: # is a geometry
+    elif "coordinates" in geo:  # is a geometry
         elem = geometry_element(context, ns, geo)
     return elem
+
 
 def subelement(parent, ob, **kw):
     """Append new element to the parent element.
     """
     parent.append(element(parent, ob, **kw))
-    
+
+
 def coords_to_kml(geom):
-    gtype = geom['type']
-    if gtype == 'Point':
-        coords = (geom['coordinates'],)
-    elif gtype == 'Polygon':
-        coords = geom['coordinates'][0]
+    gtype = geom["type"]
+    if gtype == "Point":
+        coords = (geom["coordinates"],)
+    elif gtype == "Polygon":
+        coords = geom["coordinates"][0]
     else:
-        coords = geom['coordinates']
+        coords = geom["coordinates"]
     if len(coords[0]) == 2:
-        tuples = ('%f,%f,0.0' % tuple(c) for c in coords)
+        tuples = ("%f,%f,0.0" % tuple(c) for c in coords)
     elif len(coords[0]) == 3:
-        tuples = ('%f,%f,%f' % tuple(c) for c in coords)
+        tuples = ("%f,%f,%f" % tuple(c) for c in coords)
     else:
         raise ValueError("Invalid dimensions")
-    return ' '.join(tuples)
+    return " ".join(tuples)
+
 
 def geometry_element(context, ns, ob):
-    gtype = ob['type']
-    geom_elem = context.makeelement('{%s}%s' % (ns, gtype), {})
-    if gtype in ['Point', 'LineString']:
-        sub_coords_elem = context.makeelement('{%s}coordinates' % ns, {})
+    gtype = ob["type"]
+    geom_elem = context.makeelement("{%s}%s" % (ns, gtype), {})
+    if gtype in ["Point", "LineString"]:
+        sub_coords_elem = context.makeelement("{%s}coordinates" % ns, {})
         sub_coords_elem.text = coords_to_kml(ob)
     else:
         pass
     geom_elem.append(sub_coords_elem)
     return geom_elem
 
+
 def placemark_element(context, ns, ob, **kw):
-    pm_elem = context.makeelement('{%s}Placemark' % ns, {})
-    pm_elem.attrib['id'] = ob.get('id') or kw.get('id')
-    sub_name_elem = context.makeelement('{%s}name' % ns, {})
-    sub_name_elem.text = kw.get('name') or ob.get(
-        'properties', {}).get('title')
+    pm_elem = context.makeelement("{%s}Placemark" % ns, {})
+    pm_elem.attrib["id"] = ob.get("id") or kw.get("id")
+    sub_name_elem = context.makeelement("{%s}name" % ns, {})
+    sub_name_elem.text = kw.get("name") or ob.get("properties", {}).get("title")
     pm_elem.append(sub_name_elem)
-    sub_snippet_elem = context.makeelement('{%s}Snippet' % ns, {})
-    sub_snippet_elem.text = kw.get('snippet') or ob.get(
-        'properties', {}).get('description')
+    sub_snippet_elem = context.makeelement("{%s}Snippet" % ns, {})
+    sub_snippet_elem.text = kw.get("snippet") or ob.get("properties", {}).get(
+        "description"
+    )
     pm_elem.append(sub_snippet_elem)
-    sub_description_elem = context.makeelement('{%s}description' % ns, {})
-    sub_description_elem.text = kw.get('description') or ob.get(
-        'properties', {}).get('content')
+    sub_description_elem = context.makeelement("{%s}description" % ns, {})
+    sub_description_elem.text = kw.get("description") or ob.get("properties", {}).get(
+        "content"
+    )
     pm_elem.append(sub_description_elem)
-    if 'geometry' in ob:
-        sub_geom_elem = geometry_element(context, ns, ob.get('geometry'))
+    if "geometry" in ob:
+        sub_geom_elem = geometry_element(context, ns, ob.get("geometry"))
         pm_elem.append(sub_geom_elem)
     return pm_elem
-

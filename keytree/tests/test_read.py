@@ -1,4 +1,3 @@
-
 from unittest import TestCase
 from xml.etree import ElementTree as etree
 
@@ -60,11 +59,14 @@ KML = """<?xml version="1.0" encoding="UTF-8"?>
 </kml>
 """
 
+
 class FeatureReaderTestCase(TestCase):
     def setUp(self):
         self.doc = etree.fromstring(KML)
         self.placemarks = self.doc.findall(
-            '*/{http://www.opengis.net/kml/2.2}Placemark' )
+            "*/{http://www.opengis.net/kml/2.2}Placemark"
+        )
+
     def failUnlessCoordsAlmostEqual(self, a, b, precision=7):
         for x, y in zip(a, b):
             self.failUnlessAlmostEqual(x, y, precision)
@@ -72,56 +74,53 @@ class FeatureReaderTestCase(TestCase):
     def test_properties_context(self):
         f = feature(self.placemarks[0])
         props = f.properties
-        self.assertTrue('name' in props['@context'])
-        self.assertTrue('snippet' in props['@context'])
-        self.assertTrue('description' in props['@context'])
+        self.assertTrue("name" in props["@context"])
+        self.assertTrue("snippet" in props["@context"])
+        self.assertTrue("description" in props["@context"])
 
     def test_point(self):
         f = feature(self.placemarks[0])
-        self.assertTrue(f.geometry.type == f['geometry']['type'] == 'Point')
+        self.assertTrue(f.geometry.type == f["geometry"]["type"] == "Point")
         coords = f.geometry.coordinates
-        self.failUnlessCoordsAlmostEqual(
-            coords, (-122.36438, 37.82466, 0.0), 5 )
+        self.failUnlessCoordsAlmostEqual(coords, (-122.36438, 37.82466, 0.0), 5)
+        self.assertTrue(f.properties["name"] == f["properties"]["name"] == "point")
         self.assertTrue(
-            f.properties['name'] == f['properties']['name'] == 'point' )
+            f.properties["snippet"] == f["properties"]["snippet"] == "Point test"
+        )
         self.assertTrue(
-            f.properties['snippet'] == f['properties']['snippet'] \
-            == 'Point test' )
-        self.assertTrue(
-            f.properties['description'] == f['properties']['description'] \
-            == 'Blah, blah, blah' )
+            f.properties["description"]
+            == f["properties"]["description"]
+            == "Blah, blah, blah"
+        )
 
     def test_linestring(self):
         f = feature(self.placemarks[1])
-        self.assertTrue(f.geometry.type == f['geometry']['type'] == 'LineString')
+        self.assertTrue(f.geometry.type == f["geometry"]["type"] == "LineString")
         coords0 = f.geometry.coordinates[0]
-        self.failUnlessCoordsAlmostEqual(
-            coords0, (-122.36438, 37.82466, 0.0), 5 )
+        self.failUnlessCoordsAlmostEqual(coords0, (-122.36438, 37.82466, 0.0), 5)
+        self.assertTrue(f.properties["name"] == f["properties"]["name"] == "linestring")
         self.assertTrue(
-            f.properties['name'] == f['properties']['name'] == 'linestring' )
+            f.properties["snippet"] == f["properties"]["snippet"] == "LineString test"
+        )
         self.assertTrue(
-            f.properties['snippet'] == f['properties']['snippet'] \
-            == 'LineString test' )
-        self.assertTrue(
-            f.properties['description'] == f['properties']['description'] \
-            == 'Blah, blah, blah' )
+            f.properties["description"]
+            == f["properties"]["description"]
+            == "Blah, blah, blah"
+        )
 
     def test_polygon(self):
         f = feature(self.placemarks[2])
-        self.assertTrue(f.geometry.type == f['geometry']['type'] == 'Polygon')
+        self.assertTrue(f.geometry.type == f["geometry"]["type"] == "Polygon")
         coords0 = f.geometry.coordinates[0][0]
-        self.failUnlessCoordsAlmostEqual(
-            coords0, (-122.366278, 37.81884, 30.0), 5 )
+        self.failUnlessCoordsAlmostEqual(coords0, (-122.366278, 37.81884, 30.0), 5)
+        self.assertTrue(f.properties["name"] == f["properties"]["name"] == "polygon")
         self.assertTrue(
-            f.properties['name'] == f['properties']['name'] == 'polygon' )
+            f.properties["snippet"] == f["properties"]["snippet"] == "Polygon test"
+        )
         self.assertTrue(
-            f.properties['snippet'] == f['properties']['snippet'] \
-            == 'Polygon test' )
-        self.assertTrue(
-            f.properties['description'] == f['properties']['description'] \
-            == 'Blah, blah, blah' )
+            f.properties["description"]
+            == f["properties"]["description"]
+            == "Blah, blah, blah"
+        )
         coords1 = f.geometry.coordinates[1][0]
-        self.failUnlessCoordsAlmostEqual(
-            coords1, (-122.366212, 37.818977, 30.0), 5 )
-
-
+        self.failUnlessCoordsAlmostEqual(coords1, (-122.366212, 37.818977, 30.0), 5)
