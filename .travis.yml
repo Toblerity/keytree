@@ -1,0 +1,17 @@
+dist: xenial
+language: python
+python:
+  - "3.7"
+install:
+  - "pip install nose"
+  - "python setup.py develop"
+script:
+  - "python setup.py test"
+deploy:
+  on:
+    repo: Toblerity/keytree
+    python: 3.7
+    tags: true
+  provider: pypi
+  distributions: "sdist bdist_wheel"
+  user: sgillies
