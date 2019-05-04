@@ -1,0 +1,8 @@
+1.0.0 (2019-05-04)
+------------------
+
+- Python 3 compatibility added.
+- Deprecated test assertions have been fixed.
+- Code reformatted using black.
+- Project is classified as "mature". It's pretty much finished and no further
+  development is expected.

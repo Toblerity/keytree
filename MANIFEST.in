@@ -1,1 +1,3 @@
 global-include *.txt *.kml
+include LICENSE README.rst CHANGES
+exclude MANIFEST.in
