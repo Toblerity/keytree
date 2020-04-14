@@ -44,6 +44,16 @@ def geometry_LineString(element, kmlns):
     return Geometry("LineString", tuple(coords))
 
 
+def geometry_Track(element, kmlns):
+    sourcecoords = element.findall('{%s}coord' % kmlns)
+    coords = []
+    for coord in sourcecoords:
+        tv = coord.split()
+        coords.append(tuple([float(v) for v in tv]))
+
+    return Geometry("LineString", tuple(coords))
+
+
 def geometry_Polygon(element, kmlns):
     shell = element.find("{%s}outerBoundaryIs" % kmlns)
     text = shell.findtext("*/{%s}coordinates" % kmlns)
@@ -71,5 +81,6 @@ def geometry_Polygon(element, kmlns):
 geometry_factory = {
     "Point": geometry_Point,
     "LineString": geometry_LineString,
+    "Track": geometry_Track,
     "Polygon": geometry_Polygon,
 }
