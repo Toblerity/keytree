@@ -9,7 +9,7 @@ GEOM_TYPES = [
     "kml:Polygon",
     "kml:MultiGeometry",
     "gx:Track",
-    # "gx:MultiTrack",
+    "gx:MultiTrack",
 ]
 
 PROPERTIES_CONTEXT = {
