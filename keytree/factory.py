@@ -2,40 +2,45 @@
 Factories for features and geometries
 """
 
-from keytree.model import Geometry, Feature
-from keytree.model import GEOM_TYPES
+from typing import Union
+
+from keytree.model import GEOM_TYPES, Feature, Geometry
 
 
-def feature(element):
-    kmlns = element.tag.split("}")[0][1:]
+def feature(element, kmlns: Union[str, dict] = None) -> Feature:
+    if kmlns is None:
+        kmlns = {'': element.tag.split("}")[0][1:]}
+    elif isinstance(kmlns, str):
+        kmlns = {'': kmlns}
     kid = element.attrib.get("id")
-    name = element.findtext("{%s}name" % kmlns)
-    snippet = element.findtext("{%s}Snippet" % kmlns)
-    description = element.findtext("{%s}description" % kmlns)
+    name = element.findtext("name", namespaces=kmlns)
+    snippet = element.findtext("Snippet", namespaces=kmlns)
+    description = element.findtext("description", namespaces=kmlns)
     for geom_type in GEOM_TYPES:
-        tag = "{%s}%s" % (kmlns, geom_type)
-        geom_element = element.find(tag)
+        geom_element = element.find(geom_type, namespaces=kmlns)
         if geom_element is not None:
-            g = geometry(geom_element)
+            g = geometry(geom_element, kmlns=kmlns)
             return Feature(kid, g, name=name, snippet=snippet, description=description)
     return Feature(kid, None, name=name, snippet=snippet, description=description)
 
 
-def geometry(element):
+def geometry(element, kmlns: dict = None) -> Geometry:
     tp = element.tag.split("}")
-    kmlns = tp[0][1:]
+    if kmlns is None:
+        kmlns = {'': tp[0][1:]}
     geom_type = tp[1]
+    # geom_type = element.tag
     return geometry_factory[geom_type](element, kmlns)
 
 
-def geometry_Point(element, kmlns):
-    t = element.findtext("{%s}coordinates" % kmlns)
+def geometry_Point(element, kmlns: dict):
+    t = element.findtext("coordinates", namespaces=kmlns)
     tv = t.split(",")
     return Geometry("Point", tuple([float(v) for v in tv]))
 
 
-def geometry_LineString(element, kmlns):
-    text = element.findtext("{%s}coordinates" % kmlns)
+def geometry_LineString(element, kmlns: dict):
+    text = element.findtext("coordinates", namespaces=kmlns)
     ts = text.split()
     coords = []
     for t in ts:
@@ -44,8 +49,8 @@ def geometry_LineString(element, kmlns):
     return Geometry("LineString", tuple(coords))
 
 
-def geometry_Track(element, kmlns):
-    sourcecoords = element.findall('{%s}coord' % kmlns)
+def geometry_Track(element, kmlns: dict):
+    sourcecoords = element.findall('gx:coord', namespaces=kmlns)
     coords = []
     for coord in sourcecoords:
         tv = coord.split()
@@ -54,9 +59,9 @@ def geometry_Track(element, kmlns):
     return Geometry("LineString", tuple(coords))
 
 
-def geometry_Polygon(element, kmlns):
-    shell = element.find("{%s}outerBoundaryIs" % kmlns)
-    text = shell.findtext("*/{%s}coordinates" % kmlns)
+def geometry_Polygon(element, kmlns: dict):
+    shell = element.find("outerBoundaryIs", namespaces=kmlns)
+    text = shell.findtext("*/coordinates", namespaces=kmlns)
     ts = text.split()
     shell_coords = []
     for t in ts:
@@ -65,9 +70,9 @@ def geometry_Polygon(element, kmlns):
     poly_coords = []
     poly_coords.append(tuple(shell_coords))
 
-    holes = element.findall("{%s}innerBoundaryIs" % kmlns)
+    holes = element.findall("innerBoundaryIs", namespaces=kmlns)
     for hole in holes:
-        text = hole.findtext("*/{%s}coordinates" % kmlns)
+        text = hole.findtext("*/coordinates", namespaces=kmlns)
         ts = text.split()
         hole_coords = []
         for t in ts:

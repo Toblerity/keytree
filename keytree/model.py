@@ -3,7 +3,7 @@ Geometry classes
 """
 
 GEOM_TYPES = ["Point", "LineString", "LinearRing",
-              "Polygon", "MultiGeometry", "Track", "MultiTrack"]
+              "Polygon", "MultiGeometry", "gx:Track", "gx:MultiTrack"]
 
 PROPERTIES_CONTEXT = {
     "name": "http://developers.google.com/kml/documentation/kmlreference#name",
@@ -12,7 +12,7 @@ PROPERTIES_CONTEXT = {
 }
 
 
-class Dictish(object):
+class Dictish:
     # Provides dict-like access to geo_interface items.
     def __getitem__(self, key):
         return self.__geo_interface__[key]

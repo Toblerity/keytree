@@ -3,12 +3,21 @@ Functions and factories for KML elements
 """
 
 
-def kml_ns(element):
+def kml_ns(element) -> str:
     return element.tag.split("}")[0][1:]
 
+def _kmlns(element) -> dict:
+    """Returns an nsmap-style dict detected from the given element
+    """
+    return {'': element.tag.split("}")[0][1:]}
 
-def findall_placemarks(element):
-    return element.findall("*/{%s}Placemark" % kml_ns(element))
+
+def findall_placemarks(element, kml_ns: dict = None) -> list:
+    """Returns a list of Placemark elements that are children of the given element
+    """
+    if kml_ns is None:
+        kml_ns = _kmlns(element)
+    return element.findall("*/Placemark", namespaces=kml_ns)
 
 
 def element(context, ob, **kw):
