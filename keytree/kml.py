@@ -17,7 +17,7 @@ def findall_placemarks(element, kml_ns: dict = None) -> list:
     """
     if kml_ns is None:
         kml_ns = _kmlns(element)
-    return element.findall("*/Placemark", namespaces=kml_ns)
+    return element.findall(".//Placemark", namespaces=kml_ns)
 
 
 def element(context, ob, **kw):
