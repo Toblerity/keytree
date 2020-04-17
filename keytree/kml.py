@@ -8,7 +8,7 @@ def kml_ns(element):
 
 
 def findall_placemarks(element):
-    return element.findall("*/{%s}Placemark" % kml_ns(element))
+    return element.findall(".//{%s}Placemark" % kml_ns(element))
 
 
 def element(context, ob, **kw):
