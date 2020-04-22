@@ -13,9 +13,11 @@ def feature(element, kmlns: Union[str, dict] = None) -> Feature:
     elif isinstance(kmlns, str):
         kmlns = {'': kmlns}
     kid = element.attrib.get("id")
-    name = element.findtext("name", namespaces=kmlns)
+    name = element.findtext("name", namespaces=kmlns) or \
+        element.findtext("Name", namespaces=kmlns)
     snippet = element.findtext("Snippet", namespaces=kmlns)
-    description = element.findtext("description", namespaces=kmlns)
+    description = element.findtext("description", namespaces=kmlns) or \
+        element.findtext("Description", namespaces=kmlns)
     for geom_type in GEOM_TYPES:
         geom_element = element.find(geom_type, namespaces=kmlns)
         if geom_element is not None:
