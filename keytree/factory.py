@@ -2,8 +2,8 @@
 Factories for features and geometries
 """
 
-from keytree.model import Geometry, Feature
-from keytree.model import GEOM_TYPES
+import keytree.compat
+from keytree.model import Geometry, Feature, GEOM_TYPES
 
 
 def feature(element):
