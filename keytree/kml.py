@@ -2,6 +2,7 @@
 Functions and factories for KML elements
 """
 
+import keytree.compat
 
 def kml_ns(element) -> str:
     return element.tag.split("}")[0][1:]

@@ -4,6 +4,7 @@ Factories for features and geometries
 
 from typing import Union
 
+import keytree.compat
 from keytree.model import GEOM_TYPES, Feature, Geometry
 
 
