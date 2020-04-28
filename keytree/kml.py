@@ -9,7 +9,7 @@ def kml_ns(element) -> str:
     return element.tag.split("}")[0][1:]
 
 
-def _kmlns(element) -> dict:
+def kml_ns_map(element) -> dict:
     """Returns an nsmap-style dict detected from the given element
     """
     return {"": element.tag.split("}")[0][1:]}
@@ -19,7 +19,7 @@ def findall_placemarks(element, kml_ns: dict = None) -> list:
     """Returns a list of Placemark elements that are children of the given element
     """
     if kml_ns is None:
-        kml_ns = _kmlns(element)
+        kml_ns = kml_ns_map(element)
     return element.findall(".//Placemark", namespaces=kml_ns)
 
 
