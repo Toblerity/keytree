@@ -58,9 +58,8 @@ def geometry_Track(element, kmlns: dict):
     sourcecoords = element.findall("gx:coord", namespaces=kmlns)
     coords = []
     for coord in sourcecoords:
-        tv = coord.split()
+        tv = coord.text.split()
         coords.append(tuple([float(v) for v in tv]))
-
     return Geometry("LineString", tuple(coords))
 
 
