@@ -4,13 +4,15 @@ Functions and factories for KML elements
 
 import keytree.compat
 
+
 def kml_ns(element) -> str:
     return element.tag.split("}")[0][1:]
+
 
 def _kmlns(element) -> dict:
     """Returns an nsmap-style dict detected from the given element
     """
-    return {'': element.tag.split("}")[0][1:]}
+    return {"": element.tag.split("}")[0][1:]}
 
 
 def findall_placemarks(element, kml_ns: dict = None) -> list:

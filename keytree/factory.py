@@ -10,15 +10,17 @@ from keytree.model import GEOM_TYPES, Feature, Geometry
 
 def feature(element, kmlns: Union[str, dict] = None) -> Feature:
     if kmlns is None:
-        kmlns = {'': element.tag.split("}")[0][1:]}
+        kmlns = {"": element.tag.split("}")[0][1:]}
     elif isinstance(kmlns, str):
-        kmlns = {'': kmlns}
+        kmlns = {"": kmlns}
     kid = element.attrib.get("id")
-    name = element.findtext("name", namespaces=kmlns) or \
-        element.findtext("Name", namespaces=kmlns)
+    name = element.findtext("name", namespaces=kmlns) or element.findtext(
+        "Name", namespaces=kmlns
+    )
     snippet = element.findtext("Snippet", namespaces=kmlns)
-    description = element.findtext("description", namespaces=kmlns) or \
-        element.findtext("Description", namespaces=kmlns)
+    description = element.findtext("description", namespaces=kmlns) or element.findtext(
+        "Description", namespaces=kmlns
+    )
     for geom_type in GEOM_TYPES:
         geom_element = element.find(geom_type, namespaces=kmlns)
         if geom_element is not None:
@@ -30,7 +32,7 @@ def feature(element, kmlns: Union[str, dict] = None) -> Feature:
 def geometry(element, kmlns: dict = None) -> Geometry:
     tp = element.tag.split("}")
     if kmlns is None:
-        kmlns = {'': tp[0][1:]}
+        kmlns = {"": tp[0][1:]}
     geom_type = tp[1]
     # geom_type = element.tag
     return geometry_factory[geom_type](element, kmlns)
@@ -53,7 +55,7 @@ def geometry_LineString(element, kmlns: dict):
 
 
 def geometry_Track(element, kmlns: dict):
-    sourcecoords = element.findall('gx:coord', namespaces=kmlns)
+    sourcecoords = element.findall("gx:coord", namespaces=kmlns)
     coords = []
     for coord in sourcecoords:
         tv = coord.split()

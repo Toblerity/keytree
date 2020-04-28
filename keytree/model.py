@@ -2,8 +2,15 @@
 Geometry classes
 """
 
-GEOM_TYPES = ["Point", "LineString", "LinearRing",
-              "Polygon", "MultiGeometry", "gx:Track", "gx:MultiTrack"]
+GEOM_TYPES = [
+    "Point",
+    "LineString",
+    "LinearRing",
+    "Polygon",
+    "MultiGeometry",
+    "gx:Track",
+    # "gx:MultiTrack",
+]
 
 PROPERTIES_CONTEXT = {
     "name": "http://developers.google.com/kml/documentation/kmlreference#name",
