@@ -83,9 +83,30 @@ def geometry_Polygon(element, kmlns: dict = NSMAP):
     return Geometry("Polygon", tuple(poly_coords))
 
 
+def geometry_Multi(element, kmlns: dict):
+    geometries = []
+    geometry_type = multi_geometry[
+        [
+            el.tag.split("}")[1]
+            for el in element
+            if el.tag.split("}")[1] in multi_geometry.keys()
+        ][0]
+    ]
+    for i in element:
+        geometries.append(geometry(i, kmlns=kmlns).coordinates)
+    return Geometry(geometry_type, geometries)
+
+
 geometry_factory = {
     "Point": geometry_Point,
     "LineString": geometry_LineString,
     "Track": geometry_Track,
     "Polygon": geometry_Polygon,
+    "MultiGeometry": geometry_Multi,
+}
+
+multi_geometry = {
+    "Point": "MultiPoint",
+    "LineString": "MultiLineString",
+    "Polygon": "MultiPolygon",
 }
