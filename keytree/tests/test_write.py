@@ -31,7 +31,7 @@ def test_element(doc):
         elem.find("{http://www.opengis.net/kml/2.2}Point")
         .find("{http://www.opengis.net/kml/2.2}coordinates")
         .text
-        == "0.000000,0.000000,0.0",
+        == "0.000000,0.000000,0.0"
     )
 
 
