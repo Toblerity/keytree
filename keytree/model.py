@@ -3,11 +3,11 @@ Geometry classes
 """
 
 GEOM_TYPES = [
-    "Point",
-    "LineString",
-    "LinearRing",
-    "Polygon",
-    "MultiGeometry",
+    "kml:Point",
+    "kml:LineString",
+    "kml:LinearRing",
+    "kml:Polygon",
+    "kml:MultiGeometry",
     "gx:Track",
     # "gx:MultiTrack",
 ]
@@ -16,6 +16,13 @@ PROPERTIES_CONTEXT = {
     "name": "http://developers.google.com/kml/documentation/kmlreference#name",
     "snippet": "http://developers.google.com/kml/documentation/kmlreference#Snippet",
     "description": "http://developers.google.com/kml/documentation/kmlreference#description",
+}
+
+NSMAP = {
+    "": "http://www.opengis.net/kml/2.2",
+    "kml": "http://www.opengis.net/kml/2.2",
+    "gx": "http://www.google.com/kml/ext/2.2",
+    "atom": "http://www.w3.org/2005/Atom",
 }
 
 

@@ -3,6 +3,7 @@ Functions and factories for KML elements
 """
 
 import keytree.compat
+from keytree.model import NSMAP
 
 
 def kml_ns(element) -> str:
@@ -15,11 +16,9 @@ def kml_ns_map(element) -> dict:
     return {"": element.tag.split("}")[0][1:]}
 
 
-def findall_placemarks(element, kml_ns: dict = None) -> list:
+def findall_placemarks(element, kml_ns: dict = NSMAP) -> list:
     """Returns a list of Placemark elements that are children of the given element
     """
-    if kml_ns is None:
-        kml_ns = kml_ns_map(element)
     return element.findall(".//Placemark", namespaces=kml_ns)
 
 
