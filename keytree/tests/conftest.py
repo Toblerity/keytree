@@ -1,9 +1,12 @@
-import xml.etree.ElementTree
-import lxml.etree
-
 import pytest
 
+from xml.etree import ElementTree
 
-@pytest.fixture(params=[lxml.etree, xml.etree.ElementTree])
+
+@pytest.fixture(params=["lxml", "ElementTree"])
 def etree(request):
-    return request.param
+    if request.param == "lxml":
+        etree = pytest.importorskip("lxml")
+    else:
+        etree = ElementTree
+    return etree
