@@ -71,13 +71,7 @@ def doc(etree):
 
 @pytest.fixture
 def placemarks(doc):
-    return doc.findall(
-        ".//kml:Placemark",
-        namespaces={
-            "": "http://www.opengis.net/kml/2.2",
-            "kml": "http://www.opengis.net/kml/2.2",
-        },
-    )
+    return doc.findall(".//kml:Placemark")
 
 
 def test_properties_context(placemarks):
