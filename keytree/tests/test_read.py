@@ -1,6 +1,6 @@
 import pytest
 
-from keytree import feature
+from keytree import feature, kml
 
 KML = """<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
@@ -70,11 +70,6 @@ KML = """<?xml version="1.0" encoding="UTF-8"?>
 """.encode()  # lxml doesn't like unencoded strings with an encoding declaration
 
 
-#         self.placemarks = self.doc.findall(
-#             "*/{http://www.opengis.net/kml/2.2}Placemark"
-#         )
-
-
 @pytest.fixture
 def doc(etree):
     return etree.fromstring(KML)
@@ -82,7 +77,7 @@ def doc(etree):
 
 @pytest.fixture
 def placemarks(doc):
-    return doc.findall(".//kml:Placemark")
+    return kml.findall_placemarks(doc)
 
 
 def test_properties_context(placemarks):

@@ -19,7 +19,7 @@ def kml_ns_map(element) -> dict:
 def findall_placemarks(element, kml_ns: dict = NSMAP) -> list:
     """Returns a list of Placemark elements that are children of the given element
     """
-    return element.findall(".//Placemark", namespaces=kml_ns)
+    return element.findall(".//kml:Placemark", namespaces=kml_ns)
 
 
 def element(context, ob, **kw):
