@@ -59,6 +59,13 @@ def geometry_Track(element, kmlns: dict = NSMAP):
     return Geometry("LineString", tuple(coords))
 
 
+def geometry_MultiTrack(element, kmlns: dict = NSMAP):
+    geometries = []
+    for i in [el for el in element if el.tag.split("}")[1] == "Track"]:
+        geometries.append(geometry(i, kmlns=kmlns))
+    return Geometry("MultiLineString", geometries)
+
+
 def geometry_Polygon(element, kmlns: dict = NSMAP):
     shell = element.find("kml:outerBoundaryIs", namespaces=kmlns)
     text = shell.findtext("*/kml:coordinates", namespaces=kmlns)
@@ -83,7 +90,7 @@ def geometry_Polygon(element, kmlns: dict = NSMAP):
     return Geometry("Polygon", tuple(poly_coords))
 
 
-def geometry_Multi(element, kmlns: dict):
+def geometry_Multi(element, kmlns: dict = NSMAP):
     geometries = []
     geometry_type = multi_geometry[
         [
@@ -101,6 +108,7 @@ geometry_factory = {
     "Point": geometry_Point,
     "LineString": geometry_LineString,
     "Track": geometry_Track,
+    "MultiTrack": geometry_MultiTrack,
     "Polygon": geometry_Polygon,
     "MultiGeometry": geometry_Multi,
 }
