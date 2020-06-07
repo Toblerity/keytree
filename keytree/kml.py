@@ -23,28 +23,28 @@ def findall_placemarks(element, kml_ns: dict = NSMAP) -> list:
 
 
 def element(context, ob, **kw):
-    """Make a KML element from an object that provides the Python geo   
+    """Make a KML element from an object that provides the Python geo
     interface.
-    
+
     Calls context.makeelement and fleshes out the new element using properties
     of the object or keyword arguments.
-    
-    KML Placemark names derive from object 'title' properties or a 'name'   
-    argument. Snippets derive from object 'summary' properties or a 'snippet' 
-    argument. Descriptions derive from object 'content' properties or a 
+
+    KML Placemark names derive from object 'title' properties or a 'name'
+    argument. Snippets derive from object 'summary' properties or a 'snippet'
+    argument. Descriptions derive from object 'content' properties or a
     'description' argument.
-    
+
     Example:
-      
+
       >>> kml = '<kml xmlns="http://www.opengis.net/kml/2.2"><Document></Document></kml>'
       >>> from xml.etree import ElementTree
       >>> tree = ElementTree.fromstring(kml)
       >>> doc = tree[0]
       >>> doc # doctest: +ELLIPSIS
       <Element {http://www.opengis.net/kml/2.2}Document at ...>
-    
+
     First, with a geometry:
-      
+
       >>> from keytree.kml import element
       >>> from keytree.model import Geometry
       >>> g = Geometry('Point', (0.0, 0.0))
@@ -54,9 +54,9 @@ def element(context, ob, **kw):
       ('{http://www.opengis.net/kml/2.2}Point',
        None,
        [<Element {http://www.opengis.net/kml/2.2}coordinates at ...>])
-    
+
     Placemark:
-      
+
       >>> from keytree.model import Feature
       >>> f = Feature('1', geometry=g, title='Feature 1', summary='The first feature', content='Blah, blah, blah.')
       >>> elem = element(doc, f)
@@ -75,7 +75,7 @@ def element(context, ob, **kw):
        ('{http://www.opengis.net/kml/2.2}Point',
         None,
         [<Element {http://www.opengis.net/kml/2.2}coordinates at ...>])]
-    
+
     """
     ns = context.tag.split("}")[0][1:]
     geo = getattr(ob, "__geo_interface__", ob)
