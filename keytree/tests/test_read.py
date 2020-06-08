@@ -1,9 +1,9 @@
 import pytest
 
-from keytree import feature
+from keytree import feature, kml
 
 KML = """<?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2">
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
   <Document>
     <Placemark>
       <name>point</name>
@@ -24,6 +24,17 @@ KML = """<?xml version="1.0" encoding="UTF-8"?>
           -122.364383,37.824664,0 -122.364152,37.824322,0 
         </coordinates>
       </LineString>
+    </Placemark>
+    <Placemark>
+      <name>track</name>
+      <Snippet>Track test</Snippet>
+      <description>Blah, blah, blah</description>
+      <gx:Track>
+        <when>2020-12-13T07:33:02.94Z</when>
+        <when>2020-12-13T07:33:04.04Z</when>
+        <gx:coord>-122.364383 37.824664 0</gx:coord>
+        <gx:coord>-122.364152 37.824322 0</gx:coord>
+      </gx:Track>
     </Placemark>
     <Placemark>
       <name>polygon</name>
@@ -59,11 +70,6 @@ KML = """<?xml version="1.0" encoding="UTF-8"?>
 """.encode()  # lxml doesn't like unencoded strings with an encoding declaration
 
 
-#         self.placemarks = self.doc.findall(
-#             "*/{http://www.opengis.net/kml/2.2}Placemark"
-#         )
-
-
 @pytest.fixture
 def doc(etree):
     return etree.fromstring(KML)
@@ -71,13 +77,7 @@ def doc(etree):
 
 @pytest.fixture
 def placemarks(doc):
-    return doc.findall(
-        ".//kml:Placemark",
-        namespaces={
-            "": "http://www.opengis.net/kml/2.2",
-            "kml": "http://www.opengis.net/kml/2.2",
-        },
-    )
+    return kml.findall_placemarks(doc)
 
 
 def test_properties_context(placemarks):
@@ -116,8 +116,22 @@ def test_linestring(placemarks):
     )
 
 
-def test_polygon(placemarks):
+def test_track(placemarks):
     f = feature(placemarks[2])
+    assert f.geometry.type == f["geometry"]["type"] == "LineString"
+    coords0 = f.geometry.coordinates[0]
+    assert coords0 == pytest.approx((-122.36438, 37.82466, 0.0), 5)
+    assert f.properties["name"] == f["properties"]["name"] == "track"
+    assert f.properties["snippet"] == f["properties"]["snippet"] == "Track test"
+    assert (
+        f.properties["description"]
+        == f["properties"]["description"]
+        == "Blah, blah, blah"
+    )
+
+
+def test_polygon(placemarks):
+    f = feature(placemarks[3])
     assert f.geometry.type == f["geometry"]["type"] == "Polygon"
     coords0 = f.geometry.coordinates[0][0]
     assert coords0 == pytest.approx((-122.366278, 37.81884, 30.0), 5)
