@@ -32,8 +32,8 @@ KML = """<?xml version="1.0" encoding="UTF-8"?>
       <gx:Track>
         <when>2020-12-13T07:33:02.94Z</when>
         <when>2020-12-13T07:33:04.04Z</when>
-        <gx:coord>-122.364383 37.824664 0</gx:coord>
-        <gx:coord>-122.364152 37.824322 0</gx:coord>
+        <gx:coord>-122.364403 37.824664 0</gx:coord>
+        <gx:coord>-122.364172 37.824322 0</gx:coord>
       </gx:Track>
     </Placemark>
     <Placemark>
@@ -44,14 +44,14 @@ KML = """<?xml version="1.0" encoding="UTF-8"?>
         <gx:Track>
           <when>2020-12-13T07:33:02.94Z</when>
           <when>2020-12-13T07:33:04.04Z</when>
-          <gx:coord>-122.364383 37.824664 0</gx:coord>
-          <gx:coord>-122.364152 37.824322 0</gx:coord>
+          <gx:coord>-122.364423 37.824664 0</gx:coord>
+          <gx:coord>-122.364192 37.824322 0</gx:coord>
         </gx:Track>
         <gx:Track>
           <when>2020-12-13T07:33:02.94Z</when>
           <when>2020-12-13T07:33:04.04Z</when>
-          <gx:coord>-122.364383 37.824664 0</gx:coord>
-          <gx:coord>-122.364152 37.824322 0</gx:coord>
+          <gx:coord>-122.364463 37.824664 0</gx:coord>
+          <gx:coord>-122.364212 37.824322 0</gx:coord>
         </gx:Track>
       </gx:MultiTrack>
     </Placemark>
@@ -91,12 +91,12 @@ KML = """<?xml version="1.0" encoding="UTF-8"?>
       <MultiGeometry>
         <LineString>
           <coordinates>
-            -122.364383,37.824664,0 -122.364152,37.824322,0 
+            -122.364483,37.824664,0 -122.364252,37.824322,0 
           </coordinates>
         </LineString>
         <LineString>
           <coordinates>
-            -122.364383,37.824664,0 -122.364152,37.824322,0 
+            -122.364503,37.824664,0 -122.364272,37.824322,0 
           </coordinates>
         </LineString>
       </MultiGeometry>
