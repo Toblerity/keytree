@@ -2,13 +2,13 @@
 Factories for features and geometries
 """
 
-from typing import Union
+from typing import Mapping, Union
 
 import keytree.compat
 from keytree.model import GEOM_TYPES, NSMAP, Feature, Geometry
 
 
-def feature(element, kmlns: Union[str, dict] = NSMAP) -> Feature:
+def feature(element, kmlns: Union[str, Mapping] = NSMAP) -> Feature:
     kid = element.attrib.get("id")
     name = element.findtext("kml:name", namespaces=kmlns) or element.findtext(
         "kml:Name", namespaces=kmlns
@@ -25,7 +25,7 @@ def feature(element, kmlns: Union[str, dict] = NSMAP) -> Feature:
     return Feature(kid, None, name=name, snippet=snippet, description=description)
 
 
-def geometry(element, kmlns: dict = NSMAP) -> Geometry:
+def geometry(element, kmlns: Mapping = NSMAP) -> Geometry:
     tp = element.tag.split("}")
     if kmlns is None:
         kmlns = {"": tp[0][1:]}
@@ -34,13 +34,13 @@ def geometry(element, kmlns: dict = NSMAP) -> Geometry:
     return geometry_factory[geom_type](element, kmlns)
 
 
-def geometry_Point(element, kmlns: dict = NSMAP):
+def geometry_Point(element, kmlns: Mapping = NSMAP):
     t = element.findtext("kml:coordinates", namespaces=kmlns)
     tv = t.split(",")
     return Geometry("Point", tuple([float(v) for v in tv]))
 
 
-def geometry_LineString(element, kmlns: dict = NSMAP):
+def geometry_LineString(element, kmlns: Mapping = NSMAP):
     text = element.findtext("kml:coordinates", namespaces=kmlns)
     ts = text.split()
     coords = []
@@ -50,7 +50,7 @@ def geometry_LineString(element, kmlns: dict = NSMAP):
     return Geometry("LineString", tuple(coords))
 
 
-def geometry_Track(element, kmlns: dict = NSMAP):
+def geometry_Track(element, kmlns: Mapping = NSMAP):
     sourcecoords = element.findall("gx:coord", namespaces=kmlns)
     coords = []
     for coord in sourcecoords:
@@ -59,14 +59,14 @@ def geometry_Track(element, kmlns: dict = NSMAP):
     return Geometry("LineString", tuple(coords))
 
 
-def geometry_MultiTrack(element, kmlns: dict = NSMAP):
+def geometry_MultiTrack(element, kmlns: Mapping = NSMAP):
     geometries = []
     for i in [el for el in element if el.tag.split("}")[1] == "Track"]:
         geometries.append(geometry(i, kmlns=kmlns))
     return Geometry("MultiLineString", geometries)
 
 
-def geometry_Polygon(element, kmlns: dict = NSMAP):
+def geometry_Polygon(element, kmlns: Mapping = NSMAP):
     shell = element.find("kml:outerBoundaryIs", namespaces=kmlns)
     text = shell.findtext("*/kml:coordinates", namespaces=kmlns)
     ts = text.split()
@@ -90,7 +90,7 @@ def geometry_Polygon(element, kmlns: dict = NSMAP):
     return Geometry("Polygon", tuple(poly_coords))
 
 
-def geometry_Multi(element, kmlns: dict = NSMAP):
+def geometry_Multi(element, kmlns: Mapping = NSMAP):
     geometries = []
     geometry_type = multi_geometry[
         [
