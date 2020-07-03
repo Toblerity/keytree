@@ -32,9 +32,28 @@ KML = """<?xml version="1.0" encoding="UTF-8"?>
       <gx:Track>
         <when>2020-12-13T07:33:02.94Z</when>
         <when>2020-12-13T07:33:04.04Z</when>
-        <gx:coord>-122.364383 37.824664 0</gx:coord>
-        <gx:coord>-122.364152 37.824322 0</gx:coord>
+        <gx:coord>-122.364403 37.824664 0</gx:coord>
+        <gx:coord>-122.364172 37.824322 0</gx:coord>
       </gx:Track>
+    </Placemark>
+    <Placemark>
+      <name>multitrack</name>
+      <Snippet>MultiTrack test</Snippet>
+      <description>Blah, blah, blah</description>
+      <gx:MultiTrack>
+        <gx:Track>
+          <when>2020-12-13T07:33:02.94Z</when>
+          <when>2020-12-13T07:33:04.04Z</when>
+          <gx:coord>-122.364423 37.824664 0</gx:coord>
+          <gx:coord>-122.364192 37.824322 0</gx:coord>
+        </gx:Track>
+        <gx:Track>
+          <when>2020-12-13T07:33:02.94Z</when>
+          <when>2020-12-13T07:33:04.04Z</when>
+          <gx:coord>-122.364463 37.824664 0</gx:coord>
+          <gx:coord>-122.364212 37.824322 0</gx:coord>
+        </gx:Track>
+      </gx:MultiTrack>
     </Placemark>
     <Placemark>
       <name>polygon</name>
@@ -64,6 +83,23 @@ KML = """<?xml version="1.0" encoding="UTF-8"?>
           </LinearRing>
         </innerBoundaryIs>
       </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>multigeometry</name>
+      <Snippet>MultiGeometry Lines</Snippet>
+      <description>Blah, blah, blah</description>
+      <MultiGeometry>
+        <LineString>
+          <coordinates>
+            -122.364483,37.824664,0 -122.364252,37.824322,0 
+          </coordinates>
+        </LineString>
+        <LineString>
+          <coordinates>
+            -122.364503,37.824664,0 -122.364272,37.824322,0 
+          </coordinates>
+        </LineString>
+      </MultiGeometry>
     </Placemark>
   </Document>
 </kml>
@@ -130,8 +166,13 @@ def test_track(placemarks):
     )
 
 
-def test_polygon(placemarks):
+def test_multitrack(placemarks):
     f = feature(placemarks[3])
+    assert f.geometry.type == f["geometry"]["type"] == "MultiLineString"
+
+
+def test_polygon(placemarks):
+    f = feature(placemarks[4])
     assert f.geometry.type == f["geometry"]["type"] == "Polygon"
     coords0 = f.geometry.coordinates[0][0]
     assert coords0 == pytest.approx((-122.366278, 37.81884, 30.0), 5)
@@ -144,3 +185,8 @@ def test_polygon(placemarks):
     )
     coords1 = f.geometry.coordinates[1][0]
     assert coords1 == pytest.approx((-122.366212, 37.818977, 30.0), 5)
+
+
+def test_multilinestring(placemarks):
+    f = feature(placemarks[5])
+    assert f.geometry.type == f["geometry"]["type"] == "MultiLineString"

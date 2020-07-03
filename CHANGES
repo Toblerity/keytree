@@ -1,3 +1,10 @@
+2.0.0 (TBD)
+------------------
+
+- Added read support for the Google extension features Track and MultiTrack.
+- Added read support for MultiGeometry types (MultiPoint, MultiLineString, and MultiPolygon).
+- Added a default namespace mapping that can be overridden.
+
 1.1.0 (2020-04-26)
 ------------------
 

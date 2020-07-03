@@ -2,6 +2,8 @@
 Functions and factories for KML elements
 """
 
+from typing import Mapping, Dict
+
 import keytree.compat
 from keytree.model import NSMAP
 
@@ -10,13 +12,13 @@ def kml_ns(element) -> str:
     return element.tag.split("}")[0][1:]
 
 
-def kml_ns_map(element) -> dict:
+def kml_ns_map(element) -> Dict:
     """Returns an nsmap-style dict detected from the given element
     """
     return {"": element.tag.split("}")[0][1:]}
 
 
-def findall_placemarks(element, kml_ns: dict = NSMAP) -> list:
+def findall_placemarks(element, kml_ns: Mapping = NSMAP) -> list:
     """Returns a list of Placemark elements that are children of the given element
     """
     return element.findall(".//kml:Placemark", namespaces=kml_ns)
